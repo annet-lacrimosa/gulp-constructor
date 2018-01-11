@@ -1,0 +1,96 @@
+/* npm install --global gulp-cli */
+
+default task:
+	+1) watch scss/less, js, font's svg, html
+	+2) scss/less to css,                                      -->  npm install --save-dev gulp-sass
+	           					                                       -->  npm install --save-dev gulp-less
+	+3) autoprefixer,                                          -->  npm install --save-dev gulp-autoprefixer
+	+4) generate sourcemaps
+
+start localhost:
+	+1) livereload / browsersync for changes in css, js, html  -->  npm install --save-dev gulp-livereload
+												                            			   -->  npm install --save-dev gulp-connect
+
+deploy markup structure:
+  +1) deploy markup structure,                               -->  npm install gulp-git --save
+
+finish project:
+	+1) prettify css, js,                                      -->  npm install --save-dev gulp-cssbeautify
+				          		                                       -->  npm install --save-dev gulp-js-prettify
+	+2) optimize images (png, jpg, svg)                        -->  npm install --save-dev gulp-imagemin
+
+
+Additional:
+	+1) js es6 to es5,                                         -->  npm install --save-dev gulp-babel babel-preset-es2015
+	+2) minify css, js,                                        -->  npm install --save-dev gulp-clean-css
+		        			                                           -->  npm install --save-dev gulp-uglify pump
+	+3) html includes,                                         -->  npm install --save-dev gulp-file-include
+	+4) svg icons to fonts,                                    -->  npm install --save-dev gulp-iconfont gulp-iconfont-css
+	+5) Console notifications                                  -->  npm install --save-dev gulp-notify
+
+
+
+** GULP КОММАНДЫ: **
+
+  1. ОСНОВНЫЕ
+
+    1) 'gulp', 'gulp localhost' - начать отслеживать проект с SCSS на локалхосте, адрес которого указан в окне терминала.
+    2) 'gulp localhost:less' - начать отслеживать проект с LESS на локалхосте, адрес которого указан в окне терминала.
+    3) 'gulp localhost:includes' - начать отслеживать проект с SCSS и HTML вставками на локалхосте, адрес которого указан в окне терминала.
+    4) 'gulp localhost:incless' - начать отслеживать проект с LESS и HTML вставками на локалхосте, адрес которого указан в окне терминала.
+    5) 'gulp dist' - завершить проект, привести в порядок выходящие CSS и JS файлы, минифицировать картинки (JPG, PNG, GIF, SVG).
+    6) 'gulp dist:minify' - завершить проект, минифицировать выходящие CSS и JS файлы, минифицировать картинки (JPG, PNG, GIF, SVG).
+    7) 'gulp minify' - минифицировать выходящие CSS и JS файлы.
+    8) 'gulp prettify' - привести в порядок выходящие CSS и JS файлы.
+
+
+  2. ПЕРИФЕРИЙНЫЕ
+
+    1) 'gulp optimize' - минифицировать картинки (JPG, PNG, GIF, SVG).
+    2) 'gulp watch' - начать отслеживать проект с SCSS.
+    3) 'gulp watch:less' - начать отслеживать проект с LESS.
+    4) 'gulp watch:includes' - начать отслеживать проект с HTML вставками.
+    5) 'gulp babel' - скомпилировать javascript с EcmaScript 6 в EcmaScript 5.
+    6) 'gulp iconfont' - сгенерировать иконочный шрифт с SVG иконок и добавить SCSS вставку с описанием имен иконок.
+    7) 'gulp iconfont:less' - сгенерировать иконочный шрифт с SVG иконок и добавить LESS вставку с описанием имен иконок.
+    8) 'gulp deploy' - клонировать удаленный репозиторий с гита с полной маркап-структурой.
+
+
+  3. ОДИНОЧНЫЕ КОММАНДЫ
+
+    1) 'gulp scss' - скомпилировать SCSS файлы в CSS.
+    2) 'gulp less' - скомпилировать LESS файлы в CSS.
+    3) 'gulp fileinclude' - скомпилировать HTML вставки в чистый HTML.
+
+
+    DESCRIPTIONS:
+
+      1) С самого начала:
+          Прежде всего нужно установить GULP и NPM на Ваш компъютер (npm встроен в node, gulp: $ npm install --global gulp-cli).
+          Потом Вам нужно установить локальные модули: запустите комманду "$ npm install" с папки, в которой находится файл gulpfile.js.
+          Вы можете не использовать сразу все возможности этой сборки. К примеру, если Вам нужно только компиляция less файлов, Вы можете удалить 
+          папки scss, sourceicons и includes.
+          Но если Вы решите что-то добавить в середине процесса разработки проекта, то Вы сможете без проблем создать необходимую директорию
+          и просто прописать нужную GULP комманду.
+          Если будет нужно, Вы можете клонировать удаленный репозиторий с гита с полной маркап-структурой, используя комманду 2.8.
+
+      2) HTML вставки
+          Это может быть полезно, если у Вас много страниц с одинаковыми компонентами.
+          Для начала Вам нужно создать папку "includes" в вашем маркапе и разместить в этой папке HTML файлы, которые будут содержать код шаблона.
+          Эти шаблоны должны располагаться в папке "templates" внутри папки "includes" (includes/templates/header.html).
+          После компиляции Вы получите чистый HTML в Вашей корневой маркап-папке.
+          Вы можете компилировать Ваши HTML шаблоны используя различные комманды: 1.3 (по умолчанию, с SCSS), 1.4 (для LESS), 2.4.
+
+      3) Иконочный шрифт
+          Иконочные шрифты позволяют Вам использовать SVG иконки в качестве font-face и не тратить время на непростые онлайн генераторы.
+          Для начала убедитесь, что ваши иконки содержат только один цвет. Затем Вам нужно создать папку "sourceicons" в Вашем маркапе
+          и положить в нее Ваши иконки.
+          В папку "sourceicons" Вам нужно вставить каталог "template" c CSS файлом шаблона - _icons.css (sourceicons/template/_icons.css).
+          Он должен состоять из CSS шаблона: http://prntscr.com/f5ib1f.
+          После генерации иконок Вы получите иконочный шрифт в следующиих форматах: 'ttf', 'eot', 'woff', 'woff2', 'svg' в папке "fonts"
+          и SCSS или LESS вставку _icons.scss/_icons.less в папке "scss/base" (или "less/base").
+          Затем подлючите эти стили в Ваш основной SCSS/LESS файл.
+          Для того чтобы использовать иконочный шрифт Вам нужно добавить на нужный элемент два класса: <i class="icon [icon_name]"></i> - "icon" 
+          в качестве ключевого класса, указывающего, что данный элемент будет содержать шрифтовую иконку, и второй уникальный класс с именем самой иконки.
+          Каждый раз когда Вам нужно будет добавить новую иконку в уже сгенерированное семейство, Вам нужно будет остановить отслеживание в GULP
+          и ввести соответствующую GULP комманду: 2.6 (по умолчанию, с SCSS) или 2.7 (для LESS вставки).
